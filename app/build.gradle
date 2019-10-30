@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "ro.example.android"
+        minSdkVersion 21
+        targetSdkVersion 29
+
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+
+        // Disable some warnings we don't care about.
+        disable 'InvalidPackage', 'ContentDescription'
+        disable 'RtlSymmetry', 'RtlHardcoded'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+    // AndroidX
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$androidxConstraintLayoutVersion"
+    implementation "androidx.recyclerview:recyclerview:$androidxRecyclerViewVersion"
+
+    // Architecture components - ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$androidxLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata:$androidxLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$androidxLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$androidxLifecycleVersion"
+
+    // Database: Room
+//    implementation "androidx.room:room-runtime:$roomVersion"
+//    implementation "androidx.room:room-ktx:$roomVersion"
+//    kapt "androidx.room:room-compiler:$roomVersion"
+
+    // Networking: OkHttp
+//    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+//    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    // Networking: Retrofit
+//    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+//    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+//    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // Serialization: GSON
+//    implementation "com.google.code.gson:gson:$gsonVersion"
+
+    // Image Loading: Picasso
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    // Logging
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    // Dates & timestamps
+    implementation "com.jakewharton.threetenabp:threetenabp:$threeTenVersion"
+
+    // Testing
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
