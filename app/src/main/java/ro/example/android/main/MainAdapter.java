@@ -15,13 +15,12 @@ import timber.log.Timber;
 
 public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static final int VIEW_TYPE_RED = 0;
-    public static final int VIEW_TYPE_WHITE = 1;
+    private static final int VIEW_TYPE_RED = 0;
+    private static final int VIEW_TYPE_WHITE = 1;
 
     private List<Article> articles;
 
-
-    public void setArticles(List<Article> articles) {
+    void setArticles(List<Article> articles) {
         this.articles = articles;
     }
 
@@ -41,8 +40,6 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Timber.d("Creating view of type %s...", viewType);
-
         switch (viewType) {
             case VIEW_TYPE_RED:
                 return new MainRedViewHolder(
@@ -59,7 +56,6 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Timber.d("Binding item %s...", position);
         switch (getItemViewType(position)) {
             case VIEW_TYPE_RED:
                 ((MainRedViewHolder) holder).bind(articles.get(position));

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ro.example.android.R;
 import ro.example.android.core.BaseActivity;
+import ro.example.android.databinding.ActivityMainBinding;
 
 public class MainActivity extends BaseActivity {
 
@@ -15,12 +16,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        ActivityMainBinding viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        RecyclerView recyclerView = viewBinding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         MainAdapter adapter = new MainAdapter();
         recyclerView.setAdapter(adapter);
-
         adapter.setArticles(ArticleKt.getTestArticles());
     }
 }
